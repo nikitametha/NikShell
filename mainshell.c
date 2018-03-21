@@ -6,16 +6,16 @@ char *builtin_str[] =
 {
   "cd",
   "help",
-  "exit",
-  "mkdir"
+  "exit"
+  //"mkdir"
 };
 
 int (*builtin_func[]) (char **) = 
 {
   &niksh_cd,
   &niksh_help,
-  &niksh_exit,
-  &niksh_mkdir
+  &niksh_exit
+  //&niksh_mkdir
 };
 
 
@@ -36,7 +36,7 @@ void run_shell()
 
     do
     {
-        printf("> ");
+        printf("NikSh> ");
         input = take_input();
         args = split_args(input);
         status = niksh_run(args);
@@ -102,19 +102,19 @@ int niksh_run(char **args)
     // An empty command was entered.
         return 1;
     }
-    printf("arg[0]= %s\n",args[0]);
+    //printf("arg[0]= %s\n",args[0]);
 
-    printf("arg[1]= %s\n",args[1]);
+    //printf("arg[1]= %s\n",args[1]);
 
     for (i = 0; i < niksh_builtins(); i++) 
     {
         if (strcmp(args[0], builtin_str[i]) == 0) 
         {
-            printf("%s called\n",args[0]);
+            //printf("%s called\n",args[0]);
             return (*builtin_func[i])(args);
         }
     }
-    printf("%s called- not builtin\n",args[0]);
+    //printf("%s called- not builtin\n",args[0]);
     return niksh_fork(args);
 }
 
@@ -170,7 +170,7 @@ int niksh_cd(char **args)
   return 1;
 }
 
-
+/*
 int niksh_mkdir(char **args)
 {
   if (args[1] == NULL) {
@@ -182,7 +182,7 @@ int niksh_mkdir(char **args)
   }
   return 1;
 }
-
+*/
 
 
 
